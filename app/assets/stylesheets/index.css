@@ -1,0 +1,32 @@
+/* Estilos Globais */
+html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Deixar o rodapé fixo no final */
+main {
+    flex: 1;
+}
+
+.navbar {
+    background-color: #007bff;
+}
+
+.navbar-brand, .nav-link {
+    color: white !important;
+}
+
+.footer {
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    width: 100%;
+}
+
+.footer a {
+    color: #ffc107;
+    text-decoration: none;
+}
