@@ -41,7 +41,7 @@
               <td><%= audience.address %></td>
               <td><%= number_to_currency(audience.price, unit: "R$") %></td> <!-- Exibe preço com formatação -->
               <td>
-                <%= audience.user ? audience.user.name : "Não vinculado" %> <!-- Exibe nome do usuário ou "Pendente" -->
+                <%= audience.user ? audience.user.name : "Pendente" %> <!-- Exibe nome do usuário ou "Pendente" -->
               </td>
               <td>
                 <%= link_to "👁️ Ver", audience_path(audience), class: "btn btn-info btn-sm mx-1" %>

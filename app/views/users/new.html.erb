@@ -18,6 +18,11 @@
         </div>
 
         <div class="mb-3">
+          <%= f.label :oab, "🆔 OAB" %> <!-- Campo para OAB -->
+          <%= f.text_field :oab, class: "form-control", placeholder: "Digite o número da OAB" %>
+        </div>
+
+        <div class="mb-3">
           <%= f.label :password, "🔑 Senha" %>
           <%= f.password_field :password, class: "form-control", placeholder: "Digite a senha" %>
         </div>

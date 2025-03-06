@@ -15,6 +15,21 @@
           <%= f.email_field :email, class: "form-control", placeholder: "Digite o email" %>
         </div>
 
+        <div class="mb-3">
+          <%= f.label :oab, "🆔 OAB" %>
+          <%= f.text_field :oab, class: "form-control", placeholder: "Digite o número da OAB" %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :password, "🔑 Nova Senha" %>
+          <%= f.password_field :password, class: "form-control", placeholder: "Digite a nova senha (deixe em branco para não alterar)" %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :password_confirmation, "🔑 Confirmar Nova Senha" %>
+          <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Confirme a nova senha" %>
+        </div>
+
         <!-- Campo para selecionar o papel do usuário como administrador -->
         <div class="mb-3">
           <%= f.label :admin, "👑 Administrador" %>
