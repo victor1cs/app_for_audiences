@@ -1,16 +1,54 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-5">
+  <div class="card shadow-lg rounded">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+      <h2 class="mb-0">👥 Lista de Usuários</h2>
+      <%= link_to "➕ Novo Usuário", new_user_path, class: "btn btn-light text-primary fw-bold" %>
+    </div>
 
-<% content_for :title, "Users" %>
+    <div class="card-body">
+      <!-- 🔎 Filtro de busca -->
+      <div class="mb-4">
+        <%= form_with url: users_path, method: :get, local: true, class: "d-flex gap-2 align-items-center" do |f| %>
+          <%= f.text_field :q, value: params[:q], placeholder: "🔍 Buscar por nome ou email...", class: "form-control" %>
 
-<h1>Users</h1>
+          <%= f.select :role, 
+                [["Todos", ""], ["Administrador", "true"], ["Normal", "false"]], 
+                { selected: params[:role] }, 
+                { class: "form-select" } %>
 
-<div id="users">
-  <% @users.each do |user| %>
-    <%= render user %>
-    <p>
-      <%= link_to "Show this user", user %>
-    </p>
-  <% end %>
+          <%= f.submit "Filtrar", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+
+      <!-- 📝 Tabela de usuários -->
+      <table class="table table-striped table-hover text-center">
+        <thead class="table-dark">
+          <tr>
+            <th>#</th>
+            <th>👤 Nome</th>
+            <th>✉️ Email</th>
+            <th>📅 Criado em</th>
+            <th>👑 Administrador</th> <!-- Nova coluna para Administrador -->
+            <th>⚙️ Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td><%= user.id %></td>
+              <td><%= user.name %></td>
+              <td><%= user.email %></td>
+              <td><%= user.created_at.strftime("%d/%m/%Y") %></td>
+              <td><%= user.admin? ? "Administrador" : "Normal" %></td> <!-- Exibe "Sim" ou "Não" se for administrador -->
+              <td>
+                <%= link_to "👁️ Visualizar", user_path(user), class: "btn btn-info btn-sm mx-1" %>
+                <%= link_to "✏️ Editar", edit_user_path(user), class: "btn btn-warning btn-sm mx-1" %>
+                <%= link_to "🗑️ Excluir", user_path(user), method: :delete, data: { confirm: "Tem certeza?" }, class: "btn btn-danger btn-sm mx-1" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
-
-<%= link_to "New user", new_user_path %>

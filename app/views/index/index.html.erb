@@ -1,6 +1,60 @@
 <% content_for :title, "Página Inicial" %>
 
-<h1 class="text-center">Bem-vindo ao Sistema de Audiências</h1>
+<!-- Bem-vindo -->
+<div class="container mt-5 text-center">
+  <h1 class="mb-4">Bem-vindo ao Sistema de Audiências</h1>
+  <p class="lead mb-4">Explore nossos serviços e conheça mais sobre nós.</p>
+</div>
 
-<p class="text-center">Explore nossos serviços e conheça mais sobre nós.</p>
+<!-- Botões de Ação -->
+<div class="container mt-5 text-center">
+  <div class="d-flex justify-content-center flex-wrap mt-4">
+    <%= link_to "📅 Agendar Nova Audiência", new_audience_path, class: "btn btn-primary mx-2 mb-2" %>
+    <%= link_to "👤 Cadastrar Novo Usuário", new_user_path, class: "btn btn-primary mx-2 mb-2" %>
+    <%= link_to "📂 Ver Todas as Audiências", audiences_path, class: "btn btn-secondary mx-2 mb-2" %>
+    <%= link_to "⚖️ Ver Todos os Usuários", users_path, class: "btn btn-secondary mx-2 mb-2" %>
+  </div>
+</div>
 
+<!-- Estatísticas -->
+<div class="container mt-5">
+  <h3 class="text-center mb-4">Estatísticas de Audiências</h3>
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 mt-4">
+    <!-- Audiências Agendadas -->
+    <div class="col mb-4">
+      <div class="card">
+        <div class="card-body text-center">
+          <h5 class="card-title">Audiências Agendadas</h5>
+          <p class="card-text display-4"><strong><%= @scheduled_audiences %></strong></p>
+        </div>
+      </div>
+    </div>
+    <!-- Audiências Concluídas -->
+    <div class="col mb-4">
+      <div class="card">
+        <div class="card-body text-center">
+          <h5 class="card-title">Audiências Concluídas</h5>
+          <p class="card-text display-4"><strong><%= @completed_audiences %></strong></p>
+        </div>
+      </div>
+    </div>
+    <!-- Audiências Pendentes -->
+    <div class="col mb-4">
+      <div class="card">
+        <div class="card-body text-center">
+          <h5 class="card-title">Audiências Pendentes</h5>
+          <p class="card-text display-4"><strong><%= @pending_audiences %></strong></p>
+        </div>
+      </div>
+    </div>
+    <!-- Audiências Canceladas -->
+    <div class="col mb-4">
+      <div class="card">
+        <div class="card-body text-center">
+          <h5 class="card-title">Audiências Canceladas</h5>
+          <p class="card-text display-4"><strong><%= @canceled_audiences %></strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

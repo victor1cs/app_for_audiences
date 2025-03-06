@@ -1,12 +1,34 @@
-<% content_for :title, "Editing user" %>
+<div class="container mt-5">
+  <div class="card shadow-lg rounded">
+    <div class="card-header bg-primary text-white text-center">
+      <h2 class="mb-0">✏️ Editar Usuário</h2>
+    </div>
+    <div class="card-body">
+      <%= form_with(model: @user, local: true) do |f| %>
+        <div class="mb-3">
+          <%= f.label :name, "👤 Nome" %>
+          <%= f.text_field :name, class: "form-control", placeholder: "Digite o nome do usuário" %>
+        </div>
 
-<h1>Editing user</h1>
+        <div class="mb-3">
+          <%= f.label :email, "✉️ Email" %>
+          <%= f.email_field :email, class: "form-control", placeholder: "Digite o email" %>
+        </div>
 
-<%= render "form", user: @user %>
+        <!-- Campo para selecionar o papel do usuário como administrador -->
+        <div class="mb-3">
+          <%= f.label :admin, "👑 Administrador" %>
+          <div class="form-check form-switch">
+            <%= f.check_box :admin, class: "form-check-input", checked: @user.admin? %>
+            <label class="form-check-label">Tornar este usuário administrador</label>
+          </div>
+        </div>
 
-<br>
-
-<div>
-  <%= link_to "Show this user", @user %> |
-  <%= link_to "Back to users", users_path %>
+        <div class="d-flex justify-content-center mt-4">
+          <%= f.submit "💾 Salvar Alterações", class: "btn btn-success mx-2" %>
+          <%= link_to "⬅️ Cancelar", user_path(@user), class: "btn btn-secondary mx-2" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>

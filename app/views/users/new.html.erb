@@ -1,11 +1,45 @@
-<% content_for :title, "New user" %>
+<% content_for :title, "Criar Usuário" %>
 
-<h1>New user</h1>
+<div class="container mt-5">
+  <div class="card shadow-lg rounded">
+    <div class="card-header bg-primary text-white text-center">
+      <h2 class="mb-0">✏️ Criar Usuário</h2>
+    </div>
+    <div class="card-body">
+      <%= form_with(model: @user, local: true) do |f| %>
+        <div class="mb-3">
+          <%= f.label :name, "👤 Nome" %>
+          <%= f.text_field :name, class: "form-control", placeholder: "Digite o nome do usuário" %>
+        </div>
 
-<%= render "form", user: @user %>
+        <div class="mb-3">
+          <%= f.label :email, "✉️ Email" %>
+          <%= f.email_field :email, class: "form-control", placeholder: "Digite o email" %>
+        </div>
 
-<br>
+        <div class="mb-3">
+          <%= f.label :password, "🔑 Senha" %>
+          <%= f.password_field :password, class: "form-control", placeholder: "Digite a senha" %>
+        </div>
 
-<div>
-  <%= link_to "Back to users", users_path %>
+        <div class="mb-3">
+          <%= f.label :password_confirmation, "🔑 Confirmar Senha" %>
+          <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Confirme a senha" %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :admin, "👑 Administrador" %>
+          <div class="form-check form-switch">
+            <%= f.check_box :admin, class: "form-check-input" %>
+            <label class="form-check-label">Tornar este usuário administrador</label>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-center mt-4">
+          <%= f.submit "💾 Criar Usuário", class: "btn btn-success mx-2" %>
+          <%= link_to "⬅️ Cancelar", users_path, class: "btn btn-secondary mx-2" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>

@@ -14,7 +14,7 @@ class AudiencesController < ApplicationController
     @audiences = @audiences.where(date: @date_filter) if @date_filter.present?
     @audiences = @audiences.where(status: @status_filter) if @status_filter.present?
   end
-
+  
   # GET /audiences/1 or /audiences/1.json
   def show
   end

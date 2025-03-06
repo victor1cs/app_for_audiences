@@ -1,49 +1,60 @@
-<div class="container mt-4">
-  <h2>Lista de Audiências</h2>
-
-  <!-- Filtros -->
-  <form method="get" class="mb-4">
-    <div class="row">
-      <div class="col-md-4">
-        <label for="date_filter">Data:</label>
-        <input type="date" name="date" id="date_filter" class="form-control" value="<%= params[:date] %>">
-      </div>
-      <div class="col-md-4">
-        <label for="status_filter">Status:</label>
-        <select name="status" id="status_filter" class="form-control">
-          <option value="">Todos</option>
-          <option value="pendente" <%= 'selected' if params[:status] == 'pendente' %>>Pendente</option>
-          <option value="concluido" <%= 'selected' if params[:status] == 'concluido' %>>Concluído</option>
-        </select>
-      </div>
-      <div class="col-md-4 d-flex align-items-end">
-        <button type="submit" class="btn btn-primary w-100">Filtrar</button>
-      </div>
+<div class="container mt-5">
+  <div class="card shadow-lg rounded">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+      <h2 class="mb-0">📅 Lista de Audiências</h2>
+      <%= link_to "➕ Nova Audiência", new_audience_path, class: "btn btn-light text-primary fw-bold" %>
     </div>
-  </form>
 
-  <!-- Tabela -->
-  <table class="table table-bordered table-striped">
-    <thead class="table-dark">
-      <tr>
-        <th>ID</th>
-        <th>Data</th>
-        <th>Endereço</th>
-        <th>Informações</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @audiences.each do |audience| %>
-        <tr>
-          <td><%= audience.id %></td>
-          <td><%= audience.date_time.strftime('%d/%m/%Y') %></td>
-          <td><%= audience.address %></td>
-          <td>
-            <a href="<%= edit_audience_path(audience) %>" class="btn btn-warning btn-sm">Editar</a>
-            <a href="<%= audience_path(audience) %>" class="btn btn-info btn-sm">Ver</a>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+    <div class="card-body">
+      <!-- 🔎 Filtro de busca -->
+      <div class="mb-4">
+        <%= form_with url: audiences_path, method: :get, local: true, class: "d-flex gap-2 align-items-center" do |f| %>
+          <%= f.date_field :date, value: params[:date], class: "form-control", placeholder: "Filtrar por Data" %>
+          
+          <%= f.select :status, 
+                [["Todos", ""], ["Pendente", "pendente"], ["Concluído", "concluido"]], 
+                { selected: params[:status] }, 
+                { class: "form-select" } %>
+
+          <%= f.submit "Filtrar", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+
+      <!-- 📝 Tabela de audiências -->
+      <table class="table table-striped table-hover text-center">
+        <thead class="table-dark">
+          <tr>
+            <th>#</th>
+            <th>📅 Data e Hora</th>
+            <th>🏠 Endereço</th>
+            <th>💰 Preço</th>
+            <th>👤 Usuário Responsável</th>
+            <th>📝 Informações</th>
+            <th>⚙️ Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @audiences.each do |audience| %>
+            <tr>
+              <td><%= audience.id %></td>
+              <td><%= audience.date_time.strftime('%d/%m/%Y %H:%M') %></td> <!-- Exibe data e hora -->
+              <td><%= audience.address %></td>
+              <td><%= number_to_currency(audience.price, unit: "R$") %></td> <!-- Exibe preço com formatação -->
+              <td>
+                <%= audience.user ? audience.user.name : "Não vinculado" %> <!-- Exibe nome do usuário ou "Pendente" -->
+              </td>
+              <td>
+                <%= link_to "👁️ Ver", audience_path(audience), class: "btn btn-info btn-sm mx-1" %>
+                <%= link_to "✏️ Editar", edit_audience_path(audience), class: "btn btn-warning btn-sm mx-1" %>
+                <%= link_to "🗑️ Excluir", audience_path(audience), method: :delete, data: { confirm: "Tem certeza que deseja excluir?" }, class: "btn btn-danger btn-sm mx-1" %>
+              </td>
+              <td>
+                <%= link_to "⚖️ Gerenciar Advogado", audience_path(audience), class: "btn btn-success btn-sm mx-1" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

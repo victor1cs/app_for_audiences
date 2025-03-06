@@ -1,11 +1,76 @@
-<% content_for :title, "New audience" %>
+<% content_for :title, "Criar Audiência" %>
 
-<h1>New audience</h1>
+<div class="container mt-5">
+  <div class="card shadow-lg rounded">
+    <div class="card-header bg-primary text-white text-center">
+      <h2 class="mb-0">✏️ Criar Audiência</h2>
+    </div>
+    <div class="card-body">
+      <%= form_with(model: @audience, local: true) do |f| %>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="mb-3">
+              <%= f.label :number, "🔢 Número" %>
+              <%= f.text_field :number, class: "form-control", placeholder: "Digite o número da audiência" %>
+            </div>
 
-<%= render "form", audience: @audience %>
+            <div class="mb-3">
+              <%= f.label :state, "🌎 Estado" %>
+              <%= f.text_field :state, class: "form-control", placeholder: "Digite o estado" %>
+            </div>
 
-<br>
+            <div class="mb-3">
+              <%= f.label :city, "🏙️ Cidade" %>
+              <%= f.text_field :city, class: "form-control", placeholder: "Digite a cidade" %>
+            </div>
 
-<div>
-  <%= link_to "Back to audiences", audiences_path %>
+            <div class="mb-3">
+              <%= f.label :address, "📍 Endereço" %>
+              <%= f.text_field :address, class: "form-control", placeholder: "Digite o endereço" %>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="mb-3">
+              <%= f.label :date_time, "📅 Data e Hora" %>
+              <%= f.datetime_field :date_time, class: "form-control" %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :price, "💰 Preço" %>
+              <%= f.text_field :price, class: "form-control", placeholder: "Digite o valor" %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :expense, "💸 Despesa" %>
+              <%= f.text_field :expense, class: "form-control", placeholder: "Digite a despesa (opcional)" %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :status, "📌 Status" %>
+              <%= f.select :status, [["Concluído", "concluido"], ["Pendente", "pendente"], ["Cancelado", "cancelado"]], {}, class: "form-control" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :user_id, "👤 Usuário Responsável" %>
+          <%= f.collection_select :user_id, User.all, :id, :name, { include_blank: "Selecione um usuário" }, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :notifications, "🔔 Notificações" %>
+          <div class="form-check form-switch">
+            <%= f.check_box :notifications, class: "form-check-input" %>
+            <label class="form-check-label">Ativar notificações</label>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-center mt-4">
+          <%= f.submit "💾 Criar Audiência", class: "btn btn-success mx-2" %>
+          <%= link_to "⬅️ Cancelar", audiences_path, class: "btn btn-secondary mx-2" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>

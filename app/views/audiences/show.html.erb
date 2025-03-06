@@ -1,10 +1,36 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-5">
+  <div class="card shadow-lg rounded">
+    <div class="card-header bg-primary text-white text-center">
+      <h2 class="mb-0">📌 Detalhes da Audiência</h2>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <p><strong>🔢 Número:</strong> <span class="badge bg-secondary"><%= @audience.number %></span></p>
+          <p><strong>🌎 Estado:</strong> <%= @audience.state %></p>
+          <p><strong>🏙️ Cidade:</strong> <%= @audience.city %></p>
+          <p><strong>📍 Endereço:</strong> <%= @audience.address %></p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>📅 Data e Hora:</strong> <span class="text-success"><%= @audience.date_time.strftime("%d/%m/%Y %H:%M") %></span></p>
+          <p><strong>💰 Preço:</strong> <span class="text-warning">R$ <%= number_to_currency(@audience.price, unit: "", separator: ",", delimiter: ".") %></span></p>
+          <p><strong>💸 Despesa:</strong> <%= @audience.expense.present? ? number_to_currency(@audience.expense, unit: "", separator: ",", delimiter: ".") : "<span class='text-muted'>Não informado</span>".html_safe %></p>
+          <p><strong>📌 Status:</strong> <span class="badge <%= @audience.status == 'concluido' ? 'bg-success' : 'bg-warning' %>"><%= @audience.status.humanize %></span></p>
+        </div>
+      </div>
 
-<%= render @audience %>
+      <hr>
 
-<div>
-  <%= link_to "Edit this audience", edit_audience_path(@audience) %> |
-  <%= link_to "Back to audiences", audiences_path %>
+      <p><strong>👤 Usuário:</strong> <%= @audience.user.present? ? @audience.user.name : "<span class='text-muted'>Não vinculado</span>".html_safe %></p>
+      <p><strong>🔔 Notificações:</strong> <span class="<%= @audience.notifications ? 'text-success' : 'text-danger' %>">
+        <%= @audience.notifications ? "Ativadas ✅" : "Desativadas ❌" %>
+      </span></p>
 
-  <%= button_to "Destroy this audience", @audience, method: :delete %>
+      <div class="d-flex justify-content-center mt-4">
+        <%= link_to "✏️ Editar", edit_audience_path(@audience), class: "btn btn-primary mx-2" %>
+        <%= link_to "⬅️ Voltar", audiences_path, class: "btn btn-secondary mx-2" %>
+        <%= link_to "🗑️ Excluir", @audience, method: :delete, data: { confirm: "Tem certeza que deseja excluir esta audiência?" }, class: "btn btn-danger mx-2" %>
+      </div>
+    </div>
+  </div>
 </div>
