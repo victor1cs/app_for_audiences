@@ -1,16 +1,49 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-4">
+  <h2>Lista de Audiências</h2>
 
-<% content_for :title, "Audiences" %>
+  <!-- Filtros -->
+  <form method="get" class="mb-4">
+    <div class="row">
+      <div class="col-md-4">
+        <label for="date_filter">Data:</label>
+        <input type="date" name="date" id="date_filter" class="form-control" value="<%= params[:date] %>">
+      </div>
+      <div class="col-md-4">
+        <label for="status_filter">Status:</label>
+        <select name="status" id="status_filter" class="form-control">
+          <option value="">Todos</option>
+          <option value="pendente" <%= 'selected' if params[:status] == 'pendente' %>>Pendente</option>
+          <option value="concluido" <%= 'selected' if params[:status] == 'concluido' %>>Concluído</option>
+        </select>
+      </div>
+      <div class="col-md-4 d-flex align-items-end">
+        <button type="submit" class="btn btn-primary w-100">Filtrar</button>
+      </div>
+    </div>
+  </form>
 
-<h1>Audiences</h1>
-
-<div id="audiences">
-  <% @audiences.each do |audience| %>
-    <%= render audience %>
-    <p>
-      <%= link_to "Show this audience", audience %>
-    </p>
-  <% end %>
+  <!-- Tabela -->
+  <table class="table table-bordered table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Data</th>
+        <th>Endereço</th>
+        <th>Informações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @audiences.each do |audience| %>
+        <tr>
+          <td><%= audience.id %></td>
+          <td><%= audience.date_time.strftime('%d/%m/%Y') %></td>
+          <td><%= audience.address %></td>
+          <td>
+            <a href="<%= edit_audience_path(audience) %>" class="btn btn-warning btn-sm">Editar</a>
+            <a href="<%= audience_path(audience) %>" class="btn btn-info btn-sm">Ver</a>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
-
-<%= link_to "New audience", new_audience_path %>

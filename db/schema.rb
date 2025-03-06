@@ -23,7 +23,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_04_192617) do
     t.float "price"
     t.float "expense"
     t.string "status"
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.boolean "notifications"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -3,7 +3,16 @@ class AudiencesController < ApplicationController
 
   # GET /audiences or /audiences.json
   def index
+    # Pegando os parâmetros dos filtros
+    @date_filter = params[:date]
+    @status_filter = params[:status]
+  
+    # Simulando dados (substitua pela query real do banco de dados)
     @audiences = Audience.all
+  
+    # Aplicando filtros se foram passados
+    @audiences = @audiences.where(date: @date_filter) if @date_filter.present?
+    @audiences = @audiences.where(status: @status_filter) if @status_filter.present?
   end
 
   # GET /audiences/1 or /audiences/1.json

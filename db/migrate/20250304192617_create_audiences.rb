@@ -9,7 +9,7 @@ class CreateAudiences < ActiveRecord::Migration[8.0]
       t.float :price
       t.float :expense
       t.string :status
-      t.references :user, null: false, foreign_key: true
+      t.references :user, null: true, foreign_key: true
       t.boolean :notifications
 
       t.timestamps
