@@ -46,7 +46,7 @@
               <td>
                 <%= link_to "👁️ Ver", audience_path(audience), class: "btn btn-info btn-sm mx-1" %>
                 <%= link_to "✏️ Editar", edit_audience_path(audience), class: "btn btn-warning btn-sm mx-1" %>
-                <%= link_to "🗑️ Excluir", audience, method: :delete, class: "btn btn-danger btn-sm mx-1" %>
+                <%= button_to "🗑️ Excluir", audience, method: :delete, data: { confirm: "Tem certeza?" }, class: "btn btn-danger mx-2" %>
               </td>
               <td>
                 <%= link_to "⚖️ Gerenciar Advogado", audience_path(audience), class: "btn btn-success btn-sm mx-1" %>

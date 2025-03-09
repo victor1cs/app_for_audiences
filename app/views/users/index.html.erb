@@ -43,7 +43,7 @@
               <td>
                 <%= link_to "👁️ Visualizar", user_path(user), class: "btn btn-info btn-sm mx-1" %>
                 <%= link_to "✏️ Editar", edit_user_path(user), class: "btn btn-warning btn-sm mx-1" %>
-                <%= link_to "🗑️ Excluir", user_path(user), method: :delete, data: { confirm: "Tem certeza?" }, class: "btn btn-danger btn-sm mx-1" %>
+                <%= button_to "🗑️ Excluir", audience, method: :delete, data: { confirm: "Tem certeza?" }, class: "btn btn-danger mx-2" %>
               </td>
             </tr>
           <% end %>
