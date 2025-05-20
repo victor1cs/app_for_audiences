@@ -11,6 +11,11 @@
         </div>
 
         <div class="mb-3">
+          <%= f.label :cellphone, "📞 Telefone" %>
+          <%= f.text_field :cellphone, class: "form-control", placeholder: "Digite o Telefone" %>
+        </div>
+
+        <div class="mb-3">
           <%= f.label :email, "✉️ Email" %>
           <%= f.email_field :email, class: "form-control", placeholder: "Digite o email" %>
         </div>
@@ -21,27 +26,13 @@
         </div>
 
         <div class="mb-3">
-          <%= f.label :password, "🔑 Nova Senha" %>
-          <%= f.password_field :password, class: "form-control", placeholder: "Digite a nova senha (deixe em branco para não alterar)" %>
-        </div>
-
-        <div class="mb-3">
-          <%= f.label :password_confirmation, "🔑 Confirmar Nova Senha" %>
-          <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Confirme a nova senha" %>
-        </div>
-
-        <!-- Campo para selecionar o papel do usuário como administrador -->
-        <div class="mb-3">
-          <%= f.label :admin, "👑 Administrador" %>
-          <div class="form-check form-switch">
-            <%= f.check_box :admin, class: "form-check-input", checked: @user.admin? %>
-            <label class="form-check-label">Tornar este usuário administrador</label>
-          </div>
+          <%= f.label :role, "👑 Role: " %>
+          <%= f.select :role, User::ROLES.map { |r| [r.titleize, r] } %>
         </div>
 
         <div class="d-flex justify-content-center mt-4">
-          <%= f.submit "💾 Salvar Alterações", class: "btn btn-success mx-2" %>
           <%= link_to "⬅️ Cancelar", user_path(@user), class: "btn btn-secondary mx-2" %>
+          <%= f.submit "💾 Salvar Alterações", class: "btn btn-success mx-2" %>
         </div>
       <% end %>
     </div>
